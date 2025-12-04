@@ -1,0 +1,75 @@
+services:
+  # Servicio de Clientes
+  - type: web
+    name: barberia-clientes
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: cd services/clientes && pip install -r requirements.txt
+    startCommand: cd services/clientes && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: barberia-clientes-db
+          property: connectionString
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+    healthCheckPath: /health
+
+  # Servicio de Barberos
+  - type: web
+    name: barberia-barberos
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: cd services/barberos && pip install -r requirements.txt
+    startCommand: cd services/barberos && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: barberia-barberos-db
+          property: connectionString
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+    healthCheckPath: /health
+
+  # Servicio de Citas
+  - type: web
+    name: barberia-citas
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: cd services/citas && pip install -r requirements.txt
+    startCommand: cd services/citas && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: barberia-citas-db
+          property: connectionString
+      - key: CLIENTES_SERVICE_URL
+        value: https://barberia-clientes.onrender.com
+      - key: BARBEROS_SERVICE_URL
+        value: https://barberia-barberos.onrender.com
+      - key: PYTHON_VERSION
+        value: "3.11.0"
+    healthCheckPath: /health
+
+databases:
+  # Base de datos para Clientes
+  - name: barberia-clientes-db
+    databaseName: clientes_db
+    region: oregon
+    plan: free
+
+  # Base de datos para Barberos
+  - name: barberia-barberos-db
+    databaseName: barberos_db
+    region: oregon
+    plan: free
+
+  # Base de datos para Citas
+  - name: barberia-citas-db
+    databaseName: citas_db
+    region: oregon
+    plan: free
+

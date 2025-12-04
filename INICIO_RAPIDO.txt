@@ -1,0 +1,51 @@
+================================================================================
+  INICIO RAPIDO - SISTEMA DE GESTION DE BARBERIA
+================================================================================
+
+PASO 1: Abrir Docker Desktop
+-----------------------------
+  1. Presiona Windows y escribe "Docker Desktop"
+  2. Abrelo y espera 30-60 segundos hasta que este verde
+
+PASO 2: Abrir PowerShell
+-------------------------
+  1. Presiona Windows + R
+  2. Escribe: powershell
+  3. Navega al proyecto:
+     cd "C:\Users\1208j\OneDrive\Desktop\Parcial tercer corte"
+
+PASO 3: Ejecutar el Proyecto
+-----------------------------
+  docker-compose up --build
+
+  Espera 2-3 minutos. Cuando veas "Application startup complete", esta listo.
+
+================================================================================
+
+ACCEDER AL SISTEMA:
+-------------------
+  Clientes:  http://localhost:8001/docs
+  Barberos:  http://localhost:8002/docs
+  Citas:     http://localhost:8003/docs
+
+PROBAR EL SISTEMA:
+------------------
+  .\demo_barberia.ps1
+
+EJECUTAR PRUEBAS:
+-----------------
+  .\ejecutar_pruebas.ps1
+
+DETENER:
+--------
+  Presiona Ctrl+C
+
+================================================================================
+
+MAS INFORMACION:
+  - INICIO.md - Guia completa paso a paso
+  - EXAMPLES.md - Ejemplos de uso
+  - TROUBLESHOOTING.md - Solucion de problemas
+
+================================================================================
+

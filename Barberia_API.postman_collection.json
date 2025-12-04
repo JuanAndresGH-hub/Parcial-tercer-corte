@@ -1,0 +1,379 @@
+{
+	"info": {
+		"name": "Barbería API - Microservicios",
+		"description": "Colección de Postman para probar todos los endpoints de la API de gestión de barbería",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Clientes",
+			"item": [
+				{
+					"name": "Health Check - Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/health",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8001",
+							"path": ["health"]
+						}
+					}
+				},
+				{
+					"name": "Crear Cliente",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Juan Pérez\",\n  \"telefono\": \"3001234567\",\n  \"email\": \"juan@example.com\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8001/clientes/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8001",
+							"path": ["clientes", ""]
+						}
+					}
+				},
+				{
+					"name": "Listar Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/clientes/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8001",
+							"path": ["clientes", ""]
+						}
+					}
+				},
+				{
+					"name": "Obtener Cliente por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/clientes/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8001",
+							"path": ["clientes", "1"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Cliente",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Juan Actualizado\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8001/clientes/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8001",
+							"path": ["clientes", "1"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar Cliente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8001/clientes/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8001",
+							"path": ["clientes", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Barberos",
+			"item": [
+				{
+					"name": "Health Check - Barberos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8002/health",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8002",
+							"path": ["health"]
+						}
+					}
+				},
+				{
+					"name": "Crear Barbero",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"nombre\": \"Carlos Rodríguez\",\n  \"especialidad\": \"Cortes clásicos\",\n  \"telefono\": \"3007654321\",\n  \"activo\": true\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8002/barberos/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8002",
+							"path": ["barberos", ""]
+						}
+					}
+				},
+				{
+					"name": "Listar Barberos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8002/barberos/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8002",
+							"path": ["barberos", ""]
+						}
+					}
+				},
+				{
+					"name": "Listar Barberos Activos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8002/barberos/?activos_solo=true",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8002",
+							"path": ["barberos", ""],
+							"query": [
+								{
+									"key": "activos_solo",
+									"value": "true"
+								}
+							]
+						}
+					}
+				},
+				{
+					"name": "Obtener Barbero por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8002/barberos/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8002",
+							"path": ["barberos", "1"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Barbero",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"especialidad\": \"Cortes modernos\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8002/barberos/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8002",
+							"path": ["barberos", "1"]
+						}
+					}
+				},
+				{
+					"name": "Eliminar Barbero",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8002/barberos/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8002",
+							"path": ["barberos", "1"]
+						}
+					}
+				}
+			]
+		},
+		{
+			"name": "Citas",
+			"item": [
+				{
+					"name": "Health Check - Citas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/health",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8003",
+							"path": ["health"]
+						}
+					}
+				},
+				{
+					"name": "Crear Cita",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"cliente_id\": 1,\n  \"barbero_id\": 1,\n  \"fecha\": \"2025-12-10\",\n  \"hora\": \"14:00:00\",\n  \"servicio\": \"Corte de cabello\",\n  \"estado\": \"pendiente\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8003/citas/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8003",
+							"path": ["citas", ""]
+						}
+					}
+				},
+				{
+					"name": "Listar Citas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/citas/",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8003",
+							"path": ["citas", ""]
+						}
+					}
+				},
+				{
+					"name": "Obtener Cita por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/citas/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8003",
+							"path": ["citas", "1"]
+						}
+					}
+				},
+				{
+					"name": "Listar Citas por Barbero",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/citas/barbero/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8003",
+							"path": ["citas", "barbero", "1"]
+						}
+					}
+				},
+				{
+					"name": "Listar Citas por Cliente",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/citas/cliente/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8003",
+							"path": ["citas", "cliente", "1"]
+						}
+					}
+				},
+				{
+					"name": "Actualizar Cita",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"estado\": \"confirmada\"\n}"
+						},
+						"url": {
+							"raw": "http://localhost:8003/citas/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8003",
+							"path": ["citas", "1"]
+						}
+					}
+				},
+				{
+					"name": "Cancelar Cita",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8003/citas/1",
+							"protocol": "http",
+							"host": ["localhost"],
+							"port": "8003",
+							"path": ["citas", "1"]
+						}
+					}
+				}
+			]
+		}
+	]
+}
+

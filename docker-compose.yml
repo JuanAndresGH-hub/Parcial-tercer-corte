@@ -1,0 +1,103 @@
+
+services:
+  # Base de datos para servicio de clientes
+  db-clientes:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: clientes_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - clientes-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Base de datos para servicio de barberos
+  db-barberos:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: barberos_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - barberos-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Base de datos para servicio de citas
+  db-citas:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: citas_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - citas-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Servicio de Clientes
+  clientes:
+    build:
+      context: ./services/clientes
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db-clientes:5432/clientes_db
+      PORT: 8001
+    depends_on:
+      db-clientes:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Servicio de Barberos
+  barberos:
+    build:
+      context: ./services/barberos
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db-barberos:5432/barberos_db
+      PORT: 8002
+    depends_on:
+      db-barberos:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Servicio de Citas
+  citas:
+    build:
+      context: ./services/citas
+      dockerfile: Dockerfile
+    ports:
+      - "8003:8003"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db-citas:5432/citas_db
+      PORT: 8003
+      CLIENTES_SERVICE_URL: http://clientes:8001
+      BARBEROS_SERVICE_URL: http://barberos:8002
+    depends_on:
+      db-citas:
+        condition: service_healthy
+      clientes:
+        condition: service_started
+      barberos:
+        condition: service_started
+    restart: unless-stopped
+
+volumes:
+  clientes-data:
+  barberos-data:
+  citas-data:
+
