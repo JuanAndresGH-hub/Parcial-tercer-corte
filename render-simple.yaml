@@ -1,64 +1,56 @@
+# Render Blueprint - Sistema de Gestión de Barbería
+# Version simplificada y probada
+
 services:
   # Servicio de Clientes
   - type: web
     name: barberia-clientes
-    runtime: python
+    env: python
     region: oregon
     plan: free
     rootDir: services/clientes
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: barberia-db
           property: connectionString
-      - key: PYTHON_VERSION
-        value: "3.11.0"
-    healthCheckPath: /health
 
   # Servicio de Barberos
   - type: web
     name: barberia-barberos
-    runtime: python
+    env: python
     region: oregon
     plan: free
     rootDir: services/barberos
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: barberia-db
           property: connectionString
-      - key: PYTHON_VERSION
-        value: "3.11.0"
-    healthCheckPath: /health
 
   # Servicio de Citas
   - type: web
     name: barberia-citas
-    runtime: python
+    env: python
     region: oregon
     plan: free
     rootDir: services/citas
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
     envVars:
       - key: DATABASE_URL
         fromDatabase:
           name: barberia-db
           property: connectionString
-      - key: CLIENTES_SERVICE_URL
-        value: https://barberia-clientes.onrender.com
-      - key: BARBEROS_SERVICE_URL
-        value: https://barberia-barberos.onrender.com
-      - key: PYTHON_VERSION
-        value: "3.11.0"
-    healthCheckPath: /health
 
 databases:
-  # Base de datos compartida para todos los servicios
   - name: barberia-db
     databaseName: barberia_db
     region: oregon
